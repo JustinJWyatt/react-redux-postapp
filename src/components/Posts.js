@@ -13,7 +13,7 @@ class Posts extends React.Component {
 
   componentWillMount(){
     axios.get('https://jsonplaceholder.typicode.com/posts')
-         .then(res => console.log(res))
+         .then(res => this.setState({ posts: res.data }))
   }
 
   render() {

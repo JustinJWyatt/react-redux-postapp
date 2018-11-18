@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Posts from './components/Posts';
+import PostForm from './components/PostForm';
 
 class App extends Component {
   render() {
@@ -10,8 +11,9 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            This is a React client that gets and posts to JSONPlaceholder API.
           </p>
+          <p> Type something into the form.</p>
           <a
             className="App-link"
             href="https://reactjs.org"
@@ -21,6 +23,8 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <PostForm />
+        <hr/>
         <Posts />
       </div>
     );
