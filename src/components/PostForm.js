@@ -1,12 +1,15 @@
 import React from "react";
 import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { createPost } from '../actions/postActions';
 
 class PostForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      body: ""
+      title: '',
+      body: ''
     };
 
     this.onChange = this.onChange.bind(this);
@@ -25,14 +28,7 @@ class PostForm extends React.Component {
       body: this.state.body
     };
 
-    const options = {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      data: JSON.stringify(post),
-      url: 'https://jsonplaceholder.typicode.com/posts'
-    };
-
-    axios(options).then(res => console.log(res.data));
+    this.props.createPost(post);
   };
 
   render() {
@@ -67,4 +63,8 @@ class PostForm extends React.Component {
   }
 }
 
-export default PostForm;
+const mapStateToProps = state => ({
+  createPost: PropTypes.func.isRequired
+})
+
+export default connect(mapStateToProps, { createPost })(PostForm);
