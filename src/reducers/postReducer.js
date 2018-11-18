@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST } from '../actions/types';
+import { FETCH_POSTS } from '../actions/types';
 
 const initialState = {
   items: [],
@@ -13,8 +13,6 @@ export default function(state = initialState, action){
         ...state,
         items: action.payload
       }
-      break;
-
     default:
       return state;
   }
