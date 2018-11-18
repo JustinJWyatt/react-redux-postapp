@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
+import axios from 'axios';
 
 class PostForm extends React.Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      body: ''
+      title: "",
+      body: ""
     };
 
     this.onChange = this.onChange.bind(this);
@@ -16,31 +16,55 @@ class PostForm extends React.Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
   onSubmit = e => {
     e.preventDefault();
-  }
 
+    const post = {
+      title: this.state.title,
+      body: this.state.body
+    };
 
-  render () {
+    const options = {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      data: JSON.stringify(post),
+      url: 'https://jsonplaceholder.typicode.com/posts'
+    };
+
+    axios(options).then(res => console.log(res.data));
+  };
+
+  render() {
     return (
       <div>
         <h1>Add Post</h1>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <div>
-            <label>Title: </label><br />
-            <input type="text" name="title" onChange={this.onChange} value={this.state.title} />
+            <label>Title: </label>
+            <br />
+            <input
+              type="text"
+              name="title"
+              onChange={this.onChange}
+              value={this.state.title}
+            />
           </div>
           <div>
-            <label>Body: </label><br />
-            <textarea name="body" onChange={this.onChange} value={this.state.body} />
+            <label>Body: </label>
+            <br />
+            <textarea
+              name="body"
+              onChange={this.onChange}
+              value={this.state.body}
+            />
           </div>
           <br />
-          <button type="submit">Submit</button>
+          <button type="submit" >Submit</button>
         </form>
       </div>
-    )
+    );
   }
 }
 
