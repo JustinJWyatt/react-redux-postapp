@@ -64,7 +64,8 @@ class PostForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  createPost: PropTypes.func.isRequired
+  createPost: state.posts.items,
+  newPost: state.posts.item
 })
 
 export default connect(mapStateToProps, { createPost })(PostForm);
