@@ -1,19 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchPosts } from '../actions/postActions';
 
 class Posts extends React.Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      posts: []
-    };
-  }
-
   componentWillMount(){
-    axios.get('https://jsonplaceholder.typicode.com/posts')
-         .then(res => this.setState({ posts: res.data }))
+    this.props.fetchPosts();
   }
 
   render() {
@@ -34,4 +26,4 @@ class Posts extends React.Component {
   }
 }
 
-export default Posts;
+export default connect(null, {fetchPosts})(Posts);
